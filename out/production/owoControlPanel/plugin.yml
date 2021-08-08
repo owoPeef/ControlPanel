@@ -1,0 +1,8 @@
+name: owoControlPanel
+main: ru.owopeef.owocontrolpanel.Main
+version: 1.0
+commands:
+  control_panel:
+    description: Control panel menu.
+    usage: /<command>
+    aliases: [cp, c_p, c_panel, cpanel]
