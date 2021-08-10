@@ -1,6 +1,5 @@
 package ru.owopeef.owocontrolpanel.commands;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -33,13 +32,13 @@ public class Commands implements CommandExecutor
             while (a != players.size())
             {
                 Player currentPlayer = players.get(a).getPlayer();
-                Inventories.createInventory(ChatColor.GREEN + currentPlayer.getName());
+                Inventories.createInventory("§a" + currentPlayer.getName());
                 ItemStack is = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
                 SkullMeta skullMeta = (SkullMeta) is.getItemMeta();
                 skullMeta.setOwner(players.get(a).getName());
-                skullMeta.setDisplayName(ChatColor.GREEN + players.get(a).getName());
+                skullMeta.setDisplayName("§a" + players.get(a).getName());
                 List<String> loreList = new ArrayList<>();
-                loreList.add(ChatColor.RED + "Position: " + currentPlayer.getLocation().getBlockX() + " " + currentPlayer.getLocation().getBlockY() + " " + currentPlayer.getLocation().getBlockZ());
+                loreList.add("§cPosition: " + currentPlayer.getLocation().getBlockX() + " " + currentPlayer.getLocation().getBlockY() + " " + currentPlayer.getLocation().getBlockZ() + "\nLevel: " + currentPlayer.getLevel());
                 skullMeta.setLore(loreList);
                 is.setItemMeta(skullMeta);
                 items.add(is);

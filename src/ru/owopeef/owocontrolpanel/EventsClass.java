@@ -8,11 +8,11 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
+import ru.owopeef.owocontrolpanel.utils.Config;
 
 import java.util.List;
 import java.util.Objects;
 
-@SuppressWarnings("deprecation")
 public class EventsClass implements Listener
 {
     static Plugin plugin = Main.getPlugin(Main.class);
@@ -26,6 +26,7 @@ public class EventsClass implements Listener
         int a = 0;
         int b = 0;
         int c = 0;
+        int d = 0;
         List<Inventory> inventories;
         List<Player> players = plugin.getServer().getWorld("world").getPlayers();
         while (a != players.size())
@@ -66,12 +67,22 @@ public class EventsClass implements Listener
                     {
                         return;
                     }
-                    if (item.getItemMeta().getDisplayName().startsWith("§cBan"))
+                    while (true)
                     {
-                        String nick = item.getItemMeta().getDisplayName().split(" ")[1].replace("§a", "");
+                        String title = Config.readConfigWithException(String.valueOf(d), "title");
+                        String command = Config.readConfigWithException(String.valueOf(d), "command");
+                        if (Objects.equals(title, "break") || Objects.equals(command, "break"))
+                        {
+                            break;
+                        }
+                        String titleSplit = title.split(" ")[0];
+                        String nick = inventories.get(c).getTitle().substring(2);
                         Player player1 = Bukkit.getPlayer(nick);
-                        player1.setBanned(true);
-                        player1.kickPlayer("You are kicked from the server.");
+                        if (item.getItemMeta().getDisplayName().startsWith(titleSplit))
+                        {
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("{player_name}", player1.getName()));
+                        }
+                        d++;
                     }
                 }
                 c++;
