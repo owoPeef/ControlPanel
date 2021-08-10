@@ -8,6 +8,7 @@ public class Main extends JavaPlugin
     @Override
     public void onEnable()
     {
+        getServer().getPluginManager().registerEvents(new EventsClass(), this);
         getCommand("control_panel").setExecutor(new Commands());
     }
 }

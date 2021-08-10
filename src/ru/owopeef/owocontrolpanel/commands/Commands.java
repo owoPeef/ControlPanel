@@ -10,6 +10,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.Plugin;
+import ru.owopeef.owocontrolpanel.Inventories;
 import ru.owopeef.owocontrolpanel.Main;
 
 import java.util.ArrayList;
@@ -31,10 +32,15 @@ public class Commands implements CommandExecutor
             int a = 0;
             while (a != players.size())
             {
+                Player currentPlayer = players.get(a).getPlayer();
+                Inventories.createInventory(ChatColor.GREEN + currentPlayer.getName());
                 ItemStack is = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
                 SkullMeta skullMeta = (SkullMeta) is.getItemMeta();
                 skullMeta.setOwner(players.get(a).getName());
                 skullMeta.setDisplayName(ChatColor.GREEN + players.get(a).getName());
+                List<String> loreList = new ArrayList<>();
+                loreList.add(ChatColor.RED + "Position: " + currentPlayer.getLocation().getBlockX() + " " + currentPlayer.getLocation().getBlockY() + " " + currentPlayer.getLocation().getBlockZ());
+                skullMeta.setLore(loreList);
                 is.setItemMeta(skullMeta);
                 items.add(is);
                 a++;
