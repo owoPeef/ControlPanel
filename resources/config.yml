@@ -1,0 +1,5 @@
+0:
+  title: "§cBan {player_name}"
+  command: "ban {player_name}"
+  slot: 0
+  material: command

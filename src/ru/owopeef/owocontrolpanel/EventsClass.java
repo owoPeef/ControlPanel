@@ -1,5 +1,6 @@
 package ru.owopeef.owocontrolpanel;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,6 +12,7 @@ import org.bukkit.plugin.Plugin;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("deprecation")
 public class EventsClass implements Listener
 {
     static Plugin plugin = Main.getPlugin(Main.class);
@@ -23,6 +25,7 @@ public class EventsClass implements Listener
         ItemStack item = event.getCurrentItem();
         int a = 0;
         int b = 0;
+        int c = 0;
         List<Inventory> inventories;
         List<Player> players = plugin.getServer().getWorld("world").getPlayers();
         while (a != players.size())
@@ -53,6 +56,25 @@ public class EventsClass implements Listener
                         b++;
                     }
                 }
+            }
+            while (c != inventories.size())
+            {
+                if (open.getName().equals(inventories.get(c).getTitle()))
+                {
+                    event.setCancelled(true);
+                    if (item == null || !item.hasItemMeta())
+                    {
+                        return;
+                    }
+                    if (item.getItemMeta().getDisplayName().startsWith("§cBan"))
+                    {
+                        String nick = item.getItemMeta().getDisplayName().split(" ")[1].replace("§a", "");
+                        Player player1 = Bukkit.getPlayer(nick);
+                        player1.setBanned(true);
+                        player1.kickPlayer("You are kicked from the server.");
+                    }
+                }
+                c++;
             }
             a++;
         }
