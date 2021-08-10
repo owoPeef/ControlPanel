@@ -18,7 +18,8 @@ public class Inventories
     public static void createInventory(String inventoryName)
     {
         int a = 0;
-        Inventory inv = plugin.getServer().createInventory(null, 9, inventoryName);
+        int slots = Integer.parseInt(Config.readConfig("menu_slots"));
+        Inventory inv = plugin.getServer().createInventory(null, slots * 9, inventoryName);
         while (true)
         {
             String title = Config.readConfigWithException(String.valueOf(a), "title");

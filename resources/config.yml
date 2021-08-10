@@ -1,3 +1,5 @@
+menu_slots: 2
+menu_title: "Control Panel"
 0:
   title: "§cBan {player_name}"
   command: "ban {player_name}"

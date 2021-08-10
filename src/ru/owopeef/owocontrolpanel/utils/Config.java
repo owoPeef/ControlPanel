@@ -16,6 +16,10 @@ public class Config
             plugin.saveConfig();
         }
     }
+    public static String readConfig(String path)
+    {
+        return plugin.getConfig().get(path).toString();
+    }
     public static String readConfig(String path, String parent1)
     {
         return plugin.getConfig().get(path + "." + parent1).toString();

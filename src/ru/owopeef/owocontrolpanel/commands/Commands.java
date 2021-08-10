@@ -11,6 +11,7 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.Plugin;
 import ru.owopeef.owocontrolpanel.Inventories;
 import ru.owopeef.owocontrolpanel.Main;
+import ru.owopeef.owocontrolpanel.utils.Config;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,8 @@ public class Commands implements CommandExecutor
         Player player = (Player) sender;
         if (cmd.getName().equalsIgnoreCase("control_panel"))
         {
-            Inventory control_panel = plugin.getServer().createInventory(null, 9 * 6, "Control Panel");
+            String menuTitle = Config.readConfig("menu_title");
+            Inventory control_panel = plugin.getServer().createInventory(null, 9 * 6, menuTitle);
             items.clear();
             List<Player> players = plugin.getServer().getWorld("world").getPlayers();
             int a = 0;
@@ -38,7 +40,8 @@ public class Commands implements CommandExecutor
                 skullMeta.setOwner(players.get(a).getName());
                 skullMeta.setDisplayName("§a" + players.get(a).getName());
                 List<String> loreList = new ArrayList<>();
-                loreList.add("§cPosition: " + currentPlayer.getLocation().getBlockX() + " " + currentPlayer.getLocation().getBlockY() + " " + currentPlayer.getLocation().getBlockZ() + "\nLevel: " + currentPlayer.getLevel());
+                loreList.add("§cPosition: " + currentPlayer.getLocation().getBlockX() + " " + currentPlayer.getLocation().getBlockY() + " " + currentPlayer.getLocation().getBlockZ());
+                loreList.add("§cLevel: " + currentPlayer.getLevel());
                 skullMeta.setLore(loreList);
                 is.setItemMeta(skullMeta);
                 items.add(is);

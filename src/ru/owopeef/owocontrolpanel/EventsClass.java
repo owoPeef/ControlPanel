@@ -34,7 +34,8 @@ public class EventsClass implements Listener
             inventories = Inventories.inventories;
             currentPlayer = players.get(a);
             if (open == null) { return; }
-            if (open.getName().equals("Control Panel"))
+            String menuTitle = Config.readConfig("menu_title");
+            if (open.getName().equals(menuTitle))
             {
                 event.setCancelled(true);
                 if (item == null || !item.hasItemMeta())
